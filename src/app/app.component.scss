@@ -1,0 +1,41 @@
+// MAIN-NAV
+.side-container {
+  position: relative;
+  top: 60px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+}
+
+.sidenav {
+  width: 200px;
+  background: #b2bec3;
+  button {
+    background: #343a40;
+    color: #fff;
+    display: block;
+    padding: 0 24px;
+    height: 48px;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+}
+.mat-sidenav-fixed {
+  position: absolute;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+// .footer {
+//   position: fixed;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+// }
+

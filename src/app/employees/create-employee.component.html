@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="col-md-8 mx-auto">
+
+    <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+      <div class="card mb-3 mt-3">
+
+        <div class="card-header bg-dark text-light text-center">
+          <h5 class="card-title">Create Employee</h5>
+        </div>
+
+        <div class="card-body">
+
+          <!-- <div class="form-group">
+            <label for="FullName">Full Name</label>
+            <input type="text" name="fullName" [(ngModel)]="fullName" class="form-control" id="FullName" placeholder="Enter Full Name">
+          </div> End form-group ! -->
+
+          <!--////////////// NAME //////////////-->
+          <mat-form-field>
+            <!-- <mat-label>Full Name</mat-label> -->
+            <input matInput type="text" name="fullName" [(ngModel)]="fullName" id="FullName" placeholder="Enter Full Name">
+          </mat-form-field>
+
+          <!-- <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" name="Email" [(ngModel)]="Email" class="form-control" id="email" placeholder="Enter Email">
+          </div>  -->
+
+          <!--////////////// EMAIL //////////////-->
+          <mat-form-field>
+            <!-- <mat-label>Full Name</mat-label> -->
+            <input matInput type="text" name="Email" [(ngModel)]="Email" id="email" placeholder="Enter Email">
+          </mat-form-field>
+
+          <!--////////////// PHONE NUMBER //////////////-->
+          <!-- <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" name="phoneNumber" [(ngModel)]="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter phone Number">
+          </div>
+          End form-group ! -->
+
+          <!--////////////// PHONE NUMBER //////////////-->
+          <mat-form-field>
+            <!-- <mat-label>Full Name</mat-label> -->
+            <input matInput type="text" name="phoneNumber" [(ngModel)]="phoneNumber" id="phoneNumber" placeholder="Enter your phone Number">
+          </mat-form-field>
+
+          <!--////////////// CONTACT PREFERENCE RADIO //////////////-->
+          <div class="form-group">
+            <label>Contact Preference</label>
+            <div class="form-check">
+              <label class="mr-3">
+                <input type="radio" value="Email" name="contactPreference" [(ngModel)]="contactPreference"> Email
+              </label>
+
+              <label>
+                <input type="radio" value="Phone" name="contactPreference" [(ngModel)]="contactPreference"> Phone
+              </label>
+            </div>
+          </div>
+          <!-- End form-group !-->
+
+
+        <!-- <form>
+          <div>
+              <label>Contact Preference : </label>
+              <mat-radio-group formControlName="floatLabel">
+                <mat-radio-button value="Email" name="contactPreference" [(ngModel)]="contactPreference">Email</mat-radio-button>
+
+                <mat-radio-button value="Phone" name="contactPreference" [(ngModel)]="contactPreference">Phone</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </form> -->
+
+          <!--////////////// GENDER RADIO //////////////-->
+          <div class="form-group">
+            <label>Gender</label>
+            <div class="form-check">
+              <label class="mr-3">
+                <input type="radio" value="Male" name="gender" [(ngModel)]="gender"> Male
+              </label>
+
+              <label>
+                <input type="radio" value="Female" name="gender" [(ngModel)]="gender"> Female
+              </label>
+            </div>
+          </div>
+          <!-- End form-group ! -->
+
+          <!--////////////// is Active CHECKBOX //////////////-->
+          <div class="form-group ml-3">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="isActive" [(ngModel)]="isActive"> Is Active
+              </label>
+            </div>
+          </div>
+          <!-- End form-group ! -->
+
+          <!--////////////// DEPARTMENT SELECT //////////////-->
+          <div class="form-group ml-3">
+            <label class="mr-sm-2" for="department">Department</label>
+            <select class="custom-select mr-sm-2" id="department" name="department" [(ngModel)]="department">
+              <option *ngFor="let dept of departments" [value]="dept.id">
+                {{dept.name}}
+              </option>
+            </select>
+          </div>
+          <!-- End form-group ! -->
+
+          <!--////////////// DATE OF BIRTH //////////////-->
+          <p>Date Of Birth</p>
+          <mat-form-field>
+            <input matInput name="dateOfBirth" [matDatepicker]="picker" [(ngModel)]="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker touchUi="true"></mat-datepicker>
+          </mat-form-field>
+          <!-- End mat-form-group ! -->
+
+          <!--////////////// PHOTO PATH //////////////-->
+          <div class="form-group">
+            <label for="photoPath">Photo Path</label>
+            <input type="text" name="photoPath" [(ngModel)]="photoPath" class="form-control" id="photoPath" placeholder="Enter the photo path">
+          </div> <!-- End form-group ! -->
+
+          <button type="button" mat-raised-button color="primary" class="d-block mx-auto mb-3" style="width: 30%" (click)="togglePhotoPreview()">
+            {{previewPhoto? "Hide ": "Show"}} Preview
+          </button>
+
+          <div class="form-group">
+            <img [src]="photoPath" height="200" width="200" *ngIf="previewPhoto" />
+          </div>  <!-- End form-group ! -->
+
+          <button type="submit" mat-raised-button color="primary" class="d-block mx-auto" style="width: 60%">Submit</button>
+
+        </div>
+        <!-- End card-body ! -->
+      </div>
+      <!-- End card ! -->
+    </form>
+    <!-- End Form ! -->
+    Angular Generated Form Model : {{employeeForm.value | json}}
+  </div>
+  <!-- End col-md-8 ! -->
+</div>
+<!-- End container ! -->
