@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="col-md-8 mx-auto">
+  <div class="col mx-auto">
 
-    <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+    <form #employeeForm="ngForm" (ngSubmit)="saveEmployee()">
       <div class="card mb-3 mt-3">
 
         <div class="card-header bg-dark text-light text-center">
@@ -10,58 +10,90 @@
 
         <div class="card-body">
 
+          <!-- ************************** NAME ***************************** -->
           <!-- <div class="form-group">
             <label for="FullName">Full Name</label>
             <input type="text" name="fullName" [(ngModel)]="fullName" class="form-control" id="FullName" placeholder="Enter Full Name">
           </div> End form-group ! -->
+          <!-- <button (click)="employeeForm.reset()">RESET</button> -->
 
-          <!--////////////// NAME //////////////-->
+
           <mat-form-field>
-            <!-- <mat-label>Full Name</mat-label> -->
-            <input matInput type="text" name="fullName" [(ngModel)]="fullName" id="FullName" placeholder="Enter Full Name">
+            <input matInput type="text" name="name" [(ngModel)]="employee.name" id="name" placeholder="Enter Name" required #name="ngModel">
+            <mat-error *ngIf="name.invalid && name.touched">Name is required</mat-error>
           </mat-form-field>
 
-          <!-- <div class="form-group">
+          <!-- ************************** EMAIL ***************************** -->
+          <!-- <div class="form-group"
+            [class.]>
             <label for="email">Email</label>
-            <input type="text" name="Email" [(ngModel)]="Email" class="form-control" id="email" placeholder="Enter Email">
-          </div>  -->
+            <input type="text" name="email" [(ngModel)]="employee.email" class="form-control" id="email" placeholder="Enter Email" required [email]="employee.email!== ''">
+          </div> -->
 
-          <!--////////////// EMAIL //////////////-->
           <mat-form-field>
-            <!-- <mat-label>Full Name</mat-label> -->
-            <input matInput type="text" name="Email" [(ngModel)]="Email" id="email" placeholder="Enter Email">
+            <input matInput type="text" name="email" [(ngModel)]="employee.email" id="email" placeholder="Enter Email" #email="ngModel"
+              [required]="contactPreference.value == 'Email' " pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" email>
+
+            <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="employee.email=''">
+              <mat-icon>close</mat-icon>
+            </button> -->
+
+            <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
+            <!-- if email.errors is not null or undefined .. check if we have the 'required' property .. '?' for the angular safe navigation operator -->
+            <mat-error *ngIf="email.errors?.pattern">Email is invalid</mat-error>
           </mat-form-field>
 
-          <!--////////////// PHONE NUMBER //////////////-->
+          <!-- ************************** PHONE NUMBER ***************************** -->
           <!-- <div class="form-group">
             <label for="phoneNumber">Phone Number</label>
             <input type="text" name="phoneNumber" [(ngModel)]="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter phone Number">
           </div>
           End form-group ! -->
 
-          <!--////////////// PHONE NUMBER //////////////-->
           <mat-form-field>
-            <!-- <mat-label>Full Name</mat-label> -->
-            <input matInput type="text" name="phoneNumber" [(ngModel)]="phoneNumber" id="phoneNumber" placeholder="Enter your phone Number">
+            <input matInput type="number" name="phoneNumber" [(ngModel)]="employee.phoneNumber" id="phoneNumber" placeholder="Enter your phone Number"
+              [required]=" contactPreference.value == 'Phone' " #phoneNumber="ngModel">
+
+            <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="employee.phoneNumber=''">
+              <mat-icon>close</mat-icon>
+            </button> -->
+
+            <mat-error *ngIf="phoneNumber.invalid">phone Number is required</mat-error>
           </mat-form-field>
 
-          <!--////////////// CONTACT PREFERENCE RADIO //////////////-->
+          <!-- ************************   CONTACT PREFERENCE RADIO ************************** -->
           <div class="form-group">
             <label>Contact Preference</label>
             <div class="form-check">
               <label class="mr-3">
-                <input type="radio" value="Email" name="contactPreference" [(ngModel)]="contactPreference"> Email
+                <input type="radio" value="Email" name="contactPreference" [(ngModel)]="employee.contactPreference" required #contactPreference="ngModel"> Email
               </label>
 
               <label>
-                <input type="radio" value="Phone" name="contactPreference" [(ngModel)]="contactPreference"> Phone
+                <input type="radio" value="Phone" name="contactPreference" [(ngModel)]="employee.contactPreference" required #contactPreference="ngModel"> Phone
               </label>
             </div>
-          </div>
+            <mat-error *ngIf="contactPreference.invalid && contactPreference.touched">Contact Preference is required</mat-error>
+          </div><!-- End form-group ! -->
+
+
+          <!-- <div class="form-group"> -->
+          <!-- <mat-radio-group formControlName="">
+            <mat-label>Contact Preference</mat-label>
+            <mat-radio-button type="radio" value="Email" name="contactPreference" [(ngModel)]="employee.contactPreference" #contactPreference="ngModel">
+            Email
+            </mat-radio-button>
+            <mat-radio-button type="radio" value="Phone" name="contactPreference" [(ngModel)]="employee.contactPreference" #contactPreference="ngModel"> Phone
+            </mat-radio-button>
+          </mat-radio-group> -->
+          <!-- </div> -->
+
+
+          <!-- </div> -->
           <!-- End form-group !-->
 
 
-        <!-- <form>
+          <!-- <form>
           <div>
               <label>Contact Preference : </label>
               <mat-radio-group formControlName="floatLabel">
@@ -72,75 +104,125 @@
             </div>
           </form> -->
 
-          <!--////////////// GENDER RADIO //////////////-->
+          <!-- **************************   GENDER RADIO ***************************** -->
           <div class="form-group">
             <label>Gender</label>
             <div class="form-check">
               <label class="mr-3">
-                <input type="radio" value="Male" name="gender" [(ngModel)]="gender"> Male
+                <input type="radio" value="Male" name="gender" [(ngModel)]="employee.gender" required #gender="ngModel"> Male
               </label>
 
               <label>
-                <input type="radio" value="Female" name="gender" [(ngModel)]="gender"> Female
+                <input type="radio" value="Female" name="gender" [(ngModel)]="employee.gender" required #gender="ngModel"> Female
               </label>
             </div>
-          </div>
-          <!-- End form-group ! -->
-
-          <!--////////////// is Active CHECKBOX //////////////-->
+            <mat-error *ngIf="gender.invalid && gender.touched">Gender is required</mat-error>
+          </div><!-- End form-group ! -->
+          <!-- **************************   is Active CHECKBOX ***************************** -->
           <div class="form-group ml-3">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="isActive" [(ngModel)]="isActive"> Is Active
+                <input class="form-check-input" type="checkbox" name="isActive" [(ngModel)]="employee.isActive"> Is Active
               </label>
             </div>
-          </div>
-          <!-- End form-group ! -->
-
-          <!--////////////// DEPARTMENT SELECT //////////////-->
-          <div class="form-group ml-3">
+          </div><!-- End form-group ! -->
+          <!-- ************************** DEPARTMENT SELECT ***************************** -->
+          <!-- <div class="form-group ml-3">
             <label class="mr-sm-2" for="department">Department</label>
-            <select class="custom-select mr-sm-2" id="department" name="department" [(ngModel)]="department">
+            <select class="custom-select mr-sm-2" id="department" name="department" [(ngModel)]="employee.department" required #department="ngModel">
+              <option [value]="-1">
+                Select Department
+              </option>
               <option *ngFor="let dept of departments" [value]="dept.id">
                 {{dept.name}}
               </option>
             </select>
-          </div>
-          <!-- End form-group ! -->
+          </div> -->
 
-          <!--////////////// DATE OF BIRTH //////////////-->
-          <p>Date Of Birth</p>
+          <!-- <mat-form-field>
+            <mat-select placeholder="Select Department" id="department" name="department" [(ngModel)]="employee.department" required
+              #department="ngModel">
+
+              <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                {{dept.name}}
+              </mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="department.invalid && department.touched">Please choose a Department</mat-error>
+          </mat-form-field> End mat-form-field ! -->
+
+          <!--!! if you are loading the default mat-option from a database table or for some other reason if the mat option didn't work !!-->
           <mat-form-field>
-            <input matInput name="dateOfBirth" [matDatepicker]="picker" [(ngModel)]="dateOfBirth">
+            <mat-select placeholder="Select Deparment" id="department" name="department" [(ngModel)]="employee.department" appSelectValidator="select"
+              #department="ngModel">
+
+              <mat-option value="select">Select Deparment</mat-option>
+              <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                {{dept.name}}
+              </mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="department.invalid && department.errors?.defaultSelected">Please choose a Department</mat-error>
+          </mat-form-field><!-- End mat-form-field ! -->
+          <!-- **************************  DATE OF BIRTH ***************************** -->
+          <mat-form-field>
+            <mat-label>Date Of Birth</mat-label>
+            <input matInput name="dateOfBirth" [matDatepicker]="picker" [(ngModel)]="employee.dateOfBirth">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker touchUi="true"></mat-datepicker>
-          </mat-form-field>
-          <!-- End mat-form-group ! -->
-
-          <!--////////////// PHOTO PATH //////////////-->
+          </mat-form-field><!-- End mat-form-group ! -->
+          <!-- **************************  PHOTO PATH ***************************** -->
           <div class="form-group">
             <label for="photoPath">Photo Path</label>
-            <input type="text" name="photoPath" [(ngModel)]="photoPath" class="form-control" id="photoPath" placeholder="Enter the photo path">
-          </div> <!-- End form-group ! -->
+            <input type="text" name="photoPath" [(ngModel)]="employee.photoPath" class="form-control" id="photoPath" placeholder="Enter the photo path">
+          </div><!-- End form-group ! -->
 
-          <button type="button" mat-raised-button color="primary" class="d-block mx-auto mb-3" style="width: 30%" (click)="togglePhotoPreview()">
+          <button type="button" mat-raised-button color="primary" class="d-block mx-auto mb-3" (click)="togglePhotoPreview()">
             {{previewPhoto? "Hide ": "Show"}} Preview
           </button>
 
           <div class="form-group">
-            <img [src]="photoPath" height="200" width="200" *ngIf="previewPhoto" />
-          </div>  <!-- End form-group ! -->
+            <img [src]="employee.photoPath" height="200" width="200" *ngIf="previewPhoto" />
+          </div><!-- End form-group ! -->
+          <!-- ************************ PASSWORD & Confirm Password ************************* -->
+          <div ngModelGroup="passwordGroup">
+            <!-- <mat-error *ngIf="confirmPassword.invalid && confirmPassword.touched && !confirmPassword.errors?.required">Password is <strong>required</strong>
+            </mat-error> -->
 
-          <button type="submit" mat-raised-button color="primary" class="d-block mx-auto" style="width: 60%">Submit</button>
+            <!-- PASSWORD -->
+            <mat-form-field>
+              <input matInput type="text" name="password" [(ngModel)]="employee.password" placeholder="Enter Password" required #password="ngModel"
+                (change)="confirmPassword.control.updateValueAndValidity()">
+              <mat-error *ngIf="password.touched && password.errors?.required">Password is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field><!-- End mat-form-group ! -->
 
-        </div>
-        <!-- End card-body ! -->
-      </div>
-      <!-- End card ! -->
-    </form>
-    <!-- End Form ! -->
+            <!-- CONFIRM PASSWORD -->
+            <mat-form-field>
+              <input matInput type="text" name="confirmPassword" [(ngModel)]="employee.confirmPassword" placeholder="Confirm Password"
+                required #confirmPassword="ngModel" appConfirmEqualValidator="password">
+
+              <mat-error *ngIf="confirmPassword.errors?.required && confirmPassword.touched">Confirm Password is
+                <strong>required</strong>
+              </mat-error>
+
+              <mat-error *ngIf="confirmPassword.errors?.notEqual && confirmPassword.touched && !confirmPassword.errors?.required">
+                Password and Confirm Password
+                <strong>does not match</strong>
+              </mat-error>
+
+            </mat-form-field> <!-- End mat-form-group ! -->
+
+          </div> <!-- End ng-Model-group ! -->
+          <!-- **************************  SUBMIT ***************************** -->
+          <button type="submit" mat-raised-button color="primary" class="d-block mx-auto" style="width: 60%" [disabled]="employeeForm.invalid">Submit</button>
+
+        </div><!-- End card-body ! -->
+      </div><!-- End card ! -->
+    </form><!-- End Form ! -->
     Angular Generated Form Model : {{employeeForm.value | json}}
-  </div>
-  <!-- End col-md-8 ! -->
-</div>
-<!-- End container ! -->
+    <br>
+    <br> Our Employee Model : {{ employee | json }}
+  </div><!-- End col-md-8 ! -->
+</div><!-- End container ! -->

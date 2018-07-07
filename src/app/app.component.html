@@ -1,19 +1,24 @@
 <ng-container>
-  <mat-toolbar color="primary" class="header">Header</mat-toolbar>
+  <mat-toolbar class="header">Header</mat-toolbar>
 
   <mat-sidenav-container class="side-container">
 
-    <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0">
+    <mat-sidenav #sidenav [mode]="isLargeScreen() ? 'side' : 'over'" [opened]="isLargeScreen()" class="sidenav" [fixedInViewport]="false" [fixedTopGap]="0" [fixedBottomGap]="0">
 
       <button mat-raised-button routerLink="./list">LIST</button>
       <button mat-raised-button routerLink="./create">CREATE</button>
+      <a mat-raised-button [routerLink]="['/employees', 2]">get employee with id 2</a>
 
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <p>
-        <button mat-button (click)="sidenav.toggle()">Toggle</button>
-      </p>
+      <!-- <p> -->
+        <button mat-button (click)="sidenav.toggle()" id="toggle">
+          <i class="material-icons">
+            list
+            </i>
+        </button>
+      <!-- </p> -->
       <router-outlet></router-outlet> <!-- ROUTER-OUTLET -->
 
     </mat-sidenav-content>

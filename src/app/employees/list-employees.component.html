@@ -1,88 +1,18 @@
+<!-- <h1 #h1Variable>
+</h1>
 <div class="col" *ngFor="let employee of employees">
-  <div class="card mb-3 mt-3">
+  <div (click)="h1Variable.innerHTML = childComponent.displayNameAndGender()">
+    <app-display-employee [employee]="employee" #childComponent></app-display-employee>
+  </div>
+</div> -->
 
-    <div class="card-header bg-dark text-light text-center">
-      <h5 class="card-title">{{employee.name}}</h5>
-      <h6 class="card-title">{{ employee.department }}</h6>
-    </div>
+<mat-form-field class="example-full-width">
+  <input matInput placeholder="Search by name" style="width: 300px" [(ngModel)]="searchTrack">
+</mat-form-field>
 
-    <div class="card-body">
-
-      <div class="col-xs-12">
-        <div class="row vertical-align">
-
-          <div class="col-sm-4">
-            <img class="img-fluid" src="{{ employee.photoPath }}" alt="Card image cap">
-          </div> <!-- End col-sm-4 -->
-          <div class="col">
-
-            <div class="row justify-content-between">
-              <div class="col">
-                Gender :
-              </div>
-              <div class="col">
-                {{employee.gender}}
-              </div>
-            </div>
-
-            <div class="row justify-content-between">
-              <div class="col">
-                Date of Birth :
-              </div>
-              <div class="col">
-                {{employee.dateOfBirth | date}}
-              </div>
-            </div>
-
-            <div class="row justify-content-between">
-              <div class="col">
-                Contact Preference :
-              </div>
-              <div class="col">
-                {{employee.contactPreference}}
-              </div>
-            </div>
-
-            <div class="row justify-content-between">
-              <div class="col">
-                Phone :
-              </div>
-              <div class="col">
-                {{employee.phoneNumber}}
-              </div>
-            </div>
-
-            <div class="row justify-content-between">
-              <div class="col">
-                Email :
-              </div>
-              <div class="col">
-                {{employee.email}}
-              </div>
-            </div>
-
-            <div class="row justify-content-between">
-              <div class="col">
-                Department :
-              </div>
-              <div class="col">
-                {{employee.department}}
-              </div>
-            </div>
-
-            <div class="row justify-content-between">
-              <div class="col">
-                is Active :
-              </div>
-              <div class="col">
-                {{employee.isActive}}
-              </div>
-            </div>
-
-          </div> <!-- End col -->
-        </div> <!-- End row -->
-      </div> <!-- End col-xs-12 -->
-
-    </div> <!-- End card-body ! -->
-  </div> <!-- End card ! -->
-</div> <!-- End col-md ! -->
+<div class="col" *ngFor="let employee of employees | employeeFilter:searchTrack">
+  <div (click)="onClick(employee.id)" class="pointer">
+    <app-display-employee [employee]="employee" #childComponent></app-display-employee>
+  </div>
+  <!-- End col !-->
+</div>

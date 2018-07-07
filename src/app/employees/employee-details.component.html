@@ -1,0 +1,111 @@
+<div class="card mb-3 mt-3">
+
+  <div class="card-header bg-dark text-light text-center">
+    <h5 class="card-title">{{EmployeeDetail.name}}</h5>
+
+    <h6 class="card-title" [ngSwitch]="EmployeeDetail.department">
+      <span *ngSwitchCase="1">Help Desk</span>
+      <span *ngSwitchCase="2">HR</span>
+      <span *ngSwitchCase="3">IT</span>
+      <span *ngSwitchCase="4">Payroll</span>
+      <span *ngSwitchDefault>N/A</span>
+      <!-- {{ employee.department }} -->
+    </h6>
+
+  </div>
+
+  <div class="card-body">
+
+    <div class="col-xs-12">
+      <div class="row vertical-align">
+
+        <div class="col-sm-4">
+          <img class="img-fluid" src="{{ EmployeeDetail.photoPath }}" alt="Card image cap">
+        </div>
+        <!-- End col-sm-4 -->
+        <div class="col">
+
+          <div class="row justify-content-between">
+            <div class="col">
+              Gender :
+            </div>
+            <div class="col">
+              {{EmployeeDetail.gender}}
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              Date of Birth :
+            </div>
+            <div class="col">
+              {{EmployeeDetail.dateOfBirth | date}}
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              Contact Preference :
+            </div>
+            <div class="col">
+              {{EmployeeDetail.contactPreference}}
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              Phone :
+            </div>
+            <div class="col">
+              {{EmployeeDetail.phoneNumber}}
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              Email :
+            </div>
+            <div class="col">
+              {{EmployeeDetail.email}}
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              Department :
+            </div>
+            <div class="col" [ngSwitch]="EmployeeDetail.department">
+              <!-- {{employee.department}} -->
+              <span *ngSwitchCase="1">Help Desk</span>
+              <span *ngSwitchCase="2">HR</span>
+              <span *ngSwitchCase="3">IT</span>
+              <span *ngSwitchCase="4">Payroll</span>
+              <span *ngSwitchDefault>N/A</span>
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              is Active :
+            </div>
+            <div class="col">
+              {{EmployeeDetail.isActive}}
+            </div>
+          </div>
+
+        </div>
+        <!-- End col -->
+      </div>
+      <!-- End row -->
+    </div>
+    <!-- End col-xs-12 -->
+
+  </div>
+  <!-- End card-body ! -->
+  <div class="card-footer text-muted">
+    <button mat-raised-button [routerLink]="['/list']" color="primary">Back to List</button>
+    <button mat-raised-button color="primary" class="float-right"
+     (click)="viewNextEmployee()">View Next Employee</button>
+  </div>
+</div>
+<!-- End card ! -->
